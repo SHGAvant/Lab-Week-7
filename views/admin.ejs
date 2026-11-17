@@ -1,0 +1,15 @@
+<h1>Dashboard</h1>
+<p>Welcome <%= user.name %></p>
+
+<h4>Current Active Sessions:</h4>
+
+<% Object.entries(sessions || {}).forEach(([sessionId, session]) => { %>
+    <% if (session.passport?.user != null) { %>
+        <p>SessionID: <%= sessionId %></p>
+        <p>UserID: <%= session.passport.user %></p>
+    
+   <form action="/admin/revoke/<%= sessionId %>" method="POST">
+        <button type="submit" class="btn btn-danger btn-sm">Revoke Session</button>
+        </form>
+    <% } %>
+<% }); %>
